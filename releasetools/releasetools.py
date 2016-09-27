@@ -21,7 +21,6 @@ import struct
 def FullOTA_InstallEnd(info):
 	info.script.Mount("/system")
 	info.script.AppendExtra('ifelse(is_substring("SM-T900", getprop("ro.product.model")) || is_substring("SM-T900", getprop("ro.product.device")) || is_substring("SM-T900", getprop("ro.build.product")) || is_substring("v2wifixx", getprop("ro.build.product")) || is_substring("v2wifixx", getprop("ro.product.device")) || is_substring("v2wifixx", getprop("ro.product.model")), run_program("/sbin/busybox", "cp", "/system/lib/hw/v2awifi.sensors.universal5420.so", "/system/lib/hw/sensors.universal5420.so"));')
-	info.script.AppendExtra('ifelse(is_substring("SM-T900", getprop("ro.product.model")) || is_substring("SM-T900", getprop("ro.product.device")) || is_substring("SM-T900", getprop("ro.build.product")) || is_substring("v2wifixx", getprop("ro.build.product")) || is_substring("v2wifixx", getprop("ro.product.device")) || is_substring("v2wifixx", getprop("ro.product.model")), run_program("/sbin/busybox", "sed", "s/SM-P900/SM-T900/g", "/system/build.prop"));')
-	info.script.AppendExtra('ifelse(is_substring("SM-T900", getprop("ro.product.model")) || is_substring("SM-T900", getprop("ro.product.device")) || is_substring("SM-T900", getprop("ro.build.product")) || is_substring("v2wifixx", getprop("ro.build.product")) || is_substring("v2wifixx", getprop("ro.product.device")) || is_substring("v2wifixx", getprop("ro.product.model")), run_program("/sbin/busybox", "sed", "s/v1awifi/v2awifi/g", "/system/build.prop"));')
+	info.script.AppendExtra('set_metadata("/system/lib/hw/sensors.universal5420.so", "uid", 0, "gid", 0, "mode", 0644);')
 	info.script.AppendExtra('delete_recursive("/system/lib/hw/v2awifi.sensors.universal5420.so");')
 	info.script.Unmount("/system")
